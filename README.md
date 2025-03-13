@@ -1,4 +1,3 @@
-
 # Analysis of the Relationship Between Nutritional Value and Recipe Ratings
 
 Author: William Chou
@@ -11,3 +10,11 @@ Author: William Chou
 ></iframe>
 
 ANALYSIS GOES HERE
+
+## TEST DF:
+
+| ratings_bracket   |   n_ingredients |   n_steps |
+|:------------------|----------------:|----------:|
+| 2-3               |         8.33333 |  12.1667  |
+| 3-4               |         9       |   9.74359 |
+| 4-5               |         8.93478 |  10.1582  |
