@@ -229,6 +229,32 @@ The permutation test returned a p-value of 0.13. Since this is greater than our 
 
 ## Hypothesis Testing
 
+<iframe
+	src="assets/fig_bivariate.html"
+	width="660"
+	height="440"
+	frameborder="0"
+></iframe>
+
+As found in the bivariate analysis, the distribution of average rating for both healthy and unhealthy looks very similar, suggesting that the healthiness of a food does not influence average rating much.
+
+Comparing the group means, healthy foods have an average rating of 4.72 and unhealthy foods have an average rating of 4.70, leaving a difference in group means of 0.02. A permutation test will be run to check if this difference is significant at the 0.05 significance level.
+
+**Null Hypothesis:** Whether a recipe is healthy or not has no relation with its average rating and observed differences in the sample are due to random chance
+
+**Alternative Hypothesis:** Healthy recipes have higher average ratings than unhealthy ones on average and the observed differences in the sample are not due to random chance
+
+After 1,000 iterations, a graph of the empirical distribution of group mean differences can be made. The red line represents the observed difference found in our data.
+
+<iframe
+	src="assets/fig_mean_diffs.html"
+	width="660"
+	height="440"
+	frameborder="0"
+></iframe>
+
+We found a p-value of 0.067 from our permutation test, so we fail to reject the null at the 0.05 significance level. We cannot conclude that healthy recipes have higher average ratings than healthy ones.
+
 ## Framing a Prediction Problem
 
 ## Baseline Model
