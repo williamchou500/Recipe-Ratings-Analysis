@@ -97,7 +97,7 @@ The columns and their data types for the new data set are shown below.
 | n_steps            | int64          |
 | steps              | object         |
 
-## Univariate Analysis
+### Univariate Analysis
 | description        | object         |
 | ingredients        | object         |
 | n_ingredients      | int64          |
@@ -123,7 +123,7 @@ The columns and their data types for the new data set are shown below.
 | carb_protein_ratio | float64        |
 | healthy            | bool           |
 
-## Univariate Analysis
+### Univariate Analysis
 
 For my Univariate Analysis, I will look at the distribution of average rating as well as the the distribution of carbohydrate-to-protein ratios as both columns are essential for the permutation testing I will be performing as well as the for the models for my prediction problem.
 
@@ -158,7 +158,7 @@ The vertical red line is placed at where the carbohydrate-to-protein ratio is eq
 
 Most of the distribution lies at the lower end of possible values. The split between healthy and unhealthy looks to be evenly distributed so grouping on the 'healthy' column should be quite effective.
 
-## Bivariate Analysis
+### Bivariate Analysis
 
 <iframe
 	src="assets/healthy_ratings.html"
@@ -169,7 +169,7 @@ Most of the distribution lies at the lower end of possible values. The split bet
 
 It seems that the distribution of ratings for healthy and unhealthy foods is very similar. However, a permutation test to see if the two distributions come from different populations would still be worthwhile. Like the distribution of ratings without grouping on the 'healthy' column, there is still a heavy concentration of high ratings.
 
-## Interesting Aggregates
+### Interesting Aggregates
 
 The following pivot table was constructed by first placing all the recipes into brackets based on their average rating. The brackets go from non-inclusive to inclusive. 2-3 represents average ratings within (2, 3], 3-4 represents ratings within (3, 4], etc. It looks like recipes with a lower average have fewer ingredients and more steps.
 
@@ -178,3 +178,59 @@ The following pivot table was constructed by first placing all the recipes into 
 | 2-3               |         8.33333 |  12.1667  |
 | 3-4               |         9       |   9.74359 |
 | 4-5               |         8.93478 |  10.1582  |
+
+## Assessment of Missingness
+
+Looking at the dataset that was not filtered to include only recipes with 15 or more recipes, there are three columns that stand out for having a large quantity of missing values. These columns are 'description', 'rating', and 'review'.
+
+### NMAR Analysis
+
+The columns 'description' and 'review' are likely NMAR. 
+
+The publisher of a recipe might not put a description for a recipe if the dish is self-explanatory and commonly known. The publisher may also just be apathetic about the recipe they are sharing and did not feel like including a description.
+
+A reviewer of a recipe might not include review text if they did not feel particularly strong about a recipe. Whether the recipe was good or not, if they do not feel strongly about the recipe, they may just leave their default rating, different from person to person, and not leave any message behind it.
+
+### Missingness Dependency
+
+The column 'rating' is likely MAR. To check this, I will run a permutation test with 1000 iterations and a significance value of 0.05 to see if the missingness of 'rating' depends on 'saturated fat' or 'minutes'. 
+
+A new column 'missing_rated' was added to a copy of the dataset not filtered to have only those with 15 or more reviews. That dataset was used because the filtered dataset also removes duplicates and this gets rid of a lot of individual ratings. This column was shuffled and used to compare differences in group means for 'saturated fat' and 'minutes'.
+
+#### Permutation Test on 'saturated fat'
+
+**Null Hypothesis:** The missingness of 'rating' does not depend on the PDV of saturated fat contained in the recipe
+
+**Alternative Hypothesis:** The missingness of 'rating' does depend on the PDV of saturated fat contained in the recipe
+
+<iframe
+	src="assets/missingness_sat_fat.html"
+	width="800"
+	height="600"
+	frameborder="0"
+></iframe>
+
+The permutation test returned a p-value of 0. It is essentially impossible to get the observed difference in group means by chance alone. Thus, we reject the null hypothesis and can conclude that the missingness of rating does depend on the amount of saturated fat is in the recipe.
+
+**Null Hypothesis:** The missingness of 'rating' does not depend on the minutes required to complete the recipe
+
+**Alternative Hypothesis:** The missingness of 'rating' does depend on the minutes required to complete the recipe
+
+<iframe
+	src="assets/missingness_minutes.html"
+	width="800"
+	height="600"
+	frameborder="0"
+></iframe>
+
+The permutation test returned a p-value of 0.13. Since this is greater than our significance value 0.05, we fail to reject the null and cannot conclude that the missingness of 'rating' depends on the minutes required to complete the recipe.
+
+## Hypothesis Testing
+
+## Framing a Prediction Problem
+
+## Baseline Model
+
+## Final Model
+
+## Fairness Analysis
