@@ -135,7 +135,6 @@ For my Univariate Analysis, I will look at the distribution of average rating as
 	height="600"
 	frameborder="0"
 ></iframe>
-
 Looking at the distribution of 'avg_rating', we can see that the dataset is saturated with very high average ratings for recipes. We can also see that none of the recipes have an average rating of below a 2. These facts mean that our model for our prediction problem, which seeks to predict the average rating of a recipe, will be more likely to overrate recipes rather than underrate.
 
 #### carb_protein_ratio
@@ -146,7 +145,6 @@ Looking at the distribution of 'avg_rating', we can see that the dataset is satu
 	height="600"
 	frameborder="0"
 ></iframe>
-
 The vertical red line is placed at where the carbohydrate-to-protein ratio is equal 2, the value used to separate healthy and unhealthy recipes. The data looks like it contains some outliers. The largest value in the column is 208, but the majority of the data seems to lie under a ratio of 20. The next graph includes only rows with a ratio under 20 for a better view of the data.
 
 <iframe
@@ -155,11 +153,9 @@ The vertical red line is placed at where the carbohydrate-to-protein ratio is eq
 	height="600"
 	frameborder="0"
 ></iframe>
-
 Most of the distribution lies at the lower end of possible values. The split between healthy and unhealthy looks to be evenly distributed so grouping on the 'healthy' column should be quite effective.
 
 ### Bivariate Analysis
-
 <iframe
 	src="assets/healthy_ratings.html"
 	width="800"
@@ -197,7 +193,7 @@ The column 'rating' is likely MAR. To check this, I will run a permutation test 
 
 A new column 'missing_rated' was added to a copy of the dataset not filtered to have only those with 15 or more reviews. That dataset was used because the filtered dataset also removes duplicates and this gets rid of a lot of individual ratings. This column was shuffled and used to compare differences in group means for 'saturated fat' and 'minutes'.
 
-#### Permutation Test on 'saturated fat'
+### Permutation Test on 'saturated fat'
 
 **Null Hypothesis:** The missingness of 'rating' does not depend on the PDV of saturated fat contained in the recipe
 
@@ -209,8 +205,9 @@ A new column 'missing_rated' was added to a copy of the dataset not filtered to 
 	height="600"
 	frameborder="0"
 ></iframe>
-
 The permutation test returned a p-value of 0. It is essentially impossible to get the observed difference in group means by chance alone. Thus, we reject the null hypothesis and can conclude that the missingness of rating does depend on the amount of saturated fat is in the recipe.
+
+### Permutation Test on 'minutes'
 
 **Null Hypothesis:** The missingness of 'rating' does not depend on the minutes required to complete the recipe
 
@@ -222,7 +219,6 @@ The permutation test returned a p-value of 0. It is essentially impossible to ge
 	height="600"
 	frameborder="0"
 ></iframe>
-
 The permutation test returned a p-value of 0.13. Since this is greater than our significance value 0.05, we fail to reject the null and cannot conclude that the missingness of 'rating' depends on the minutes required to complete the recipe.
 
 ## Hypothesis Testing
