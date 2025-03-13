@@ -96,8 +96,6 @@ The columns and their data types for the new data set are shown below.
 | nutrition          | object         |
 | n_steps            | int64          |
 | steps              | object         |
-
-### Univariate Analysis
 | description        | object         |
 | ingredients        | object         |
 | n_ingredients      | int64          |
@@ -238,7 +236,7 @@ The permutation test returned a p-value of 0.13. Since this is greater than our 
 
 As found in the bivariate analysis, the distribution of average rating for both healthy and unhealthy looks very similar, suggesting that the healthiness of a food does not influence average rating much.
 
-Comparing the group means, healthy foods have an average rating of 4.72 and unhealthy foods have an average rating of 4.70, leaving a difference in group means of 0.02. A permutation test will be run to check if this difference is significant at the 0.05 significance level.
+Comparing the group means, healthy foods have an average rating of 4.72 and unhealthy foods have an average rating of 4.70, leaving a difference in group means of 0.02. A permutation test using difference in group means as the test statistic will be run to check if this difference is significant at the 0.05 significance level.
 
 **Null Hypothesis:** Whether a recipe is healthy or not has no relation with its average rating and observed differences in the sample are due to random chance
 
@@ -257,8 +255,43 @@ We found a p-value of 0.067 from our permutation test, so we fail to reject the 
 
 ## Framing a Prediction Problem
 
+In order to predict the average rating of recipes, I will use a regression model with the nutritional values of each recipe as the primary features.
+
+I am choosing to predict average rating because the average rating of a recipe is the best measure of how positively a recipe is received by the community. This analysis was intended to see how the nutritional value of a dish affected the reception of a recipe, so average rating is the most logical response variable.
+
+The root mean square error will be used to evaluate the model. RMSE is an effective metric to use for regression models as it measures how far off the predicted value is from the actual value. I am choosing to use this metric over the R-squared value because it is easier to understand and interpret.
+
+At the time of prediction, all the nutritional values will be available and only rows gathered to be training data will be used to fit the model. The nutritional values are included by default in every recipe posted on food.com, even before any reviews are made.
+
 ## Baseline Model
+
+For the baseline model, two columns from the dataset will be used to predict average rating: 'saturated fat' and 'healthy'
+
+The 'saturated fat' column is already in numeric form and will be left as is.
+
+The 'healthy' column is a categorical column with two possibilities, True or False. One Hot Encoding with the first column being dropped was used to convert the boolean column into a column of 1s and 0s.
+
+<iframe
+	src="assets/base_resids_plot.html"
+	width="660"
+	height="440"
+	frameborder="0"
+></iframe>
 
 ## Final Model
 
+<iframe
+	src="assets/final_resids_plot.html"
+	width="660"
+	height="440"
+	frameborder="0"
+></iframe>
+
 ## Fairness Analysis
+
+<iframe
+	src="assets/fairness_rmse.html"
+	width="660"
+	height="440"
+	frameborder="0"
+></iframe>
