@@ -131,35 +131,39 @@ For my Univariate Analysis, I will look at the distribution of average rating as
 
 <iframe
 	src="assets/fig_ratings.html"
-	width="800"
-	height="600"
+	width="600"
+	height="400"
 	frameborder="0"
 ></iframe>
+
 Looking at the distribution of 'avg_rating', we can see that the dataset is saturated with very high average ratings for recipes. We can also see that none of the recipes have an average rating of below a 2. These facts mean that our model for our prediction problem, which seeks to predict the average rating of a recipe, will be more likely to overrate recipes rather than underrate.
 
 #### carb_protein_ratio
 
 <iframe
 	src="assets/fig_ratios.html"
-	width="800"
-	height="600"
+	width="600"
+	height="400"
 	frameborder="0"
 ></iframe>
+
 The vertical red line is placed at where the carbohydrate-to-protein ratio is equal 2, the value used to separate healthy and unhealthy recipes. The data looks like it contains some outliers. The largest value in the column is 208, but the majority of the data seems to lie under a ratio of 20. The next graph includes only rows with a ratio under 20 for a better view of the data.
 
 <iframe
 	src="assets/fig_ratios_20.html"
-	width="800"
-	height="600"
+	width="600"
+	height="400"
 	frameborder="0"
 ></iframe>
+
 Most of the distribution lies at the lower end of possible values. The split between healthy and unhealthy looks to be evenly distributed so grouping on the 'healthy' column should be quite effective.
 
 ### Bivariate Analysis
+
 <iframe
 	src="assets/healthy_ratings.html"
-	width="800"
-	height="600"
+	width="600"
+	height="400"
 	frameborder="0"
 ></iframe>
 
@@ -201,10 +205,11 @@ A new column 'missing_rated' was added to a copy of the dataset not filtered to 
 
 <iframe
 	src="assets/missingness_sat_fat.html"
-	width="800"
-	height="600"
+	width="600"
+	height="400"
 	frameborder="0"
 ></iframe>
+
 The permutation test returned a p-value of 0. It is essentially impossible to get the observed difference in group means by chance alone. Thus, we reject the null hypothesis and can conclude that the missingness of rating does depend on the amount of saturated fat is in the recipe.
 
 ### Permutation Test on 'minutes'
@@ -215,10 +220,11 @@ The permutation test returned a p-value of 0. It is essentially impossible to ge
 
 <iframe
 	src="assets/missingness_minutes.html"
-	width="800"
-	height="600"
+	width="600"
+	height="400"
 	frameborder="0"
 ></iframe>
+
 The permutation test returned a p-value of 0.13. Since this is greater than our significance value 0.05, we fail to reject the null and cannot conclude that the missingness of 'rating' depends on the minutes required to complete the recipe.
 
 ## Hypothesis Testing
