@@ -131,8 +131,8 @@ For my Univariate Analysis, I will look at the distribution of average rating as
 
 <iframe
 	src="assets/fig_ratings.html"
-	width="600"
-	height="400"
+	width="606"
+	height="404"
 	frameborder="0"
 ></iframe>
 
@@ -142,8 +142,8 @@ Looking at the distribution of 'avg_rating', we can see that the dataset is satu
 
 <iframe
 	src="assets/fig_ratios.html"
-	width="600"
-	height="400"
+	width="606"
+	height="404"
 	frameborder="0"
 ></iframe>
 
@@ -151,8 +151,8 @@ The vertical red line is placed at where the carbohydrate-to-protein ratio is eq
 
 <iframe
 	src="assets/fig_ratios_20.html"
-	width="600"
-	height="400"
+	width="606"
+	height="404"
 	frameborder="0"
 ></iframe>
 
@@ -162,8 +162,8 @@ Most of the distribution lies at the lower end of possible values. The split bet
 
 <iframe
 	src="assets/healthy_ratings.html"
-	width="600"
-	height="400"
+	width="606"
+	height="404"
 	frameborder="0"
 ></iframe>
 
@@ -205,8 +205,8 @@ A new column 'missing_rated' was added to a copy of the dataset not filtered to 
 
 <iframe
 	src="assets/missingness_sat_fat.html"
-	width="600"
-	height="400"
+	width="606"
+	height="404"
 	frameborder="0"
 ></iframe>
 
@@ -220,8 +220,8 @@ The permutation test returned a p-value of 0. It is essentially impossible to ge
 
 <iframe
 	src="assets/missingness_minutes.html"
-	width="600"
-	height="400"
+	width="606"
+	height="404"
 	frameborder="0"
 ></iframe>
 
