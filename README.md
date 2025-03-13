@@ -4,7 +4,7 @@ Author: William Chou
 
 ## Introduction
 
-I have always understand that eating healthy diet is an essential part of leading a healthy life but unhealthy foods that high in carbohydrates, sodium, fats, etc. tend to be more delicious and bring a lot of immediate happiness in the short term. This led me to question how this dilemma would be reflected in food reviews for recipes online. Would the health benefits of a food boost thereception of a recipe or is taste and satisfaction more important to reviewers?
+I have always understood that eating healthy diet is an essential part of leading a healthy life, but unhealthy foods that are high in carbohydrates, sodium, fats, etc. tend to be more delicious and bring a lot of immediate happiness in the short term. This led me to question how this dilemma would be reflected in food reviews for recipes online. Would the health benefits of a food boost the reception of a recipe or is taste and satisfaction more important to reviewers?
 
 The question I am interested in answering is: **'What is the relationship between the nutritional value of a recipe and its average rating?'**.
 
