@@ -75,13 +75,13 @@ PDV values for different nutrients are different from one another. A PDV of 50% 
 
 For the purpose of grouping and for the base model, a column of booleans labeling a recipe as healthy or unhealthy will be added. For the sake of this analysis, a recipe is labeled as healthy if its ratio of carbohydrates to protein is less than 2. The carbohydrate-to-protein ratio will be saved as a column named 'carb_protein_ratio' and the column of booleans will be labled as 'healthy'.
 
-#### Step 8: Removing recipes with less than 15 reviews
+#### Step 8: Removing recipes with less than 10 reviews
 
-Since average rating is what we are training our model to find and what the analysis hopes to draw insights on, the average rating should be a good representation of the recipe. A recipe with only 1 or 2 reviews, for example, may be made to seem a lot better or worse than it actually is. For my analysis, I chose to include only recipes with more than 15 reviews and removed all duplicate recipes. A separate variable was assigned for this restricted dataset.
+Since average rating is what we are training our model to find and what the analysis hopes to draw insights on, the average rating should be a good representation of the recipe. A recipe with only 1 or 2 reviews, for example, may be made to seem a lot better or worse than it actually is. For my analysis, I chose to include only recipes with 10 or more reviews and removed all duplicate recipes. A separate variable was assigned for this restricted dataset.
 
 ### Cleaned Dataset
 
-The dataset contains 234429 rows and 33 columns without being filtered to only recipes with 15 or more reviews and 1379 rows and 33 columns when filtered. For this analysis, the filtered dataset will be always be used unless mentioned otherwise.
+The dataset contains 234429 rows and 33 columns without being filtered to only recipes with 15 or more reviews and 3369 rows and 33 columns when filtered. For this analysis, the filtered dataset will be always be used unless mentioned otherwise.
 
 The columns and their data types for the new data set are shown below.
 
@@ -271,6 +271,12 @@ The 'saturated fat' column is already in numeric form and will be left as is.
 
 The 'healthy' column is a categorical column with two possibilities, True or False. One Hot Encoding with the first column being dropped was used to convert the boolean column into a column of 1s and 0s.
 
+The dataset was split into training and test sets with the test set being 25% of the original data.
+
+The model had an RMSE of 0.27760100396487397 on the test set.
+
+The plot below shows the predicted ratings and how far off they were from the actual rating.
+
 <iframe
 	src="assets/base_resids_plot.html"
 	width="660"
@@ -278,7 +284,21 @@ The 'healthy' column is a categorical column with two possibilities, True or Fal
 	frameborder="0"
 ></iframe>
 
+The model never predicted anything below a 4 and there is a strange hole in the range about 4.72 to 4.75 that the model would never predict. The model also tends to overrate recipes, likely due to the sheer quantity of highly rated recipes featured in the dataset.
+
 ## Final Model
+
+The final model incorporates more nutritional values as features, using 'calories', 'total fat', 'sugar', 'sodium', 'protein', 'saturated fat', and 'carbohydrates' to predict average rating. The column 'healthy' that was used in the base model is not used here because it was attained by transforming 'protein' and 'carbohydrates'. Including it would be redundant.
+
+The same training and test data that was used in the base model was also used for this model.
+
+All the features aside from calories are PDV values whereas 'calories' simply states the number of calories the recipe contains. It also has the greatest variance and standard deviation of all the feataures. For these reasons, the 'calories' column was not left as is and it was transformed with Binarizer.
+
+The threshold at the Binarizer was set to was a hyperparameter for this model. Different percentiles as well as the mean of the 'calories' column were tested to see which made for the most optimal model. The percentiles used were the 10th to the 90th in increments of 10.
+
+The model had an RMSE of 0.27682661065445985 on the test set, a very small improvement from the base model. With such a small improvement from the base model despite including more features, it suggests that the features added do not have much weight when it comes to how well rated a recipe is.
+
+The plot below shows the predicted ratings and how far off they were from the actual rating.
 
 <iframe
 	src="assets/final_resids_plot.html"
@@ -286,6 +306,8 @@ The 'healthy' column is a categorical column with two possibilities, True or Fal
 	height="440"
 	frameborder="0"
 ></iframe>
+
+This model does not contain the hole in 4.7 and predicted a larger variety of ratings. Interestingly, it also rated one recipe to have an average rating of over 5. Just like the base model, it overrates recipes more than it underrates them. The range of the residuals is about the same as the base model.
 
 ## Fairness Analysis
 
