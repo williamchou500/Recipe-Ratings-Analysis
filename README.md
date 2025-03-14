@@ -315,7 +315,8 @@ For my fairness analysis, I decided to group my dataset based on the number of s
 
 Grouping by this categorical column and then finding the RMSE values of both groups, I found that recipes with over 10 steps had an RMSE of about 0.33 and recipes with under 10 steps had an RMSE of about 0.29. Though the values seem similar, a permutation test with a test statistic of difference in RMSE was conducted to see if the difference of 0.04 was statistically significant at the 0.05 significance level.
 
-**Null Hypothesis:** The model is fair. Its precision for recipes with over and under 10 steps are roughly the same and differences are due to random chacnce.
+**Null Hypothesis:** The model is fair. Its precision for recipes with over and under 10 steps are roughly the same and differences are due to random chance.
+
 **Alternative Hypothesis:** The model is unfair. The precision for recipes with under 10 steps is better than its precision for recipes with over 10 steps.
 
 1,000 iterations were run by grouping on shuffled permutations of the 'under_10_steps' column and collecting the differences in RMSE.
