@@ -307,9 +307,20 @@ The plot below shows the predicted ratings and how far off they were from the ac
 	frameborder="0"
 ></iframe>
 
-This model does not contain the hole in 4.7 and predicted a larger variety of ratings. Interestingly, it also rated one recipe to have an average rating of over 5. Just like the base model, it overrates recipes more than it underrates them. The range of the residuals is about the same as the base model.
+This model does not contain the hole in the predicted ratings from 4.72 to 4.75 and predicted a larger variety of ratings. Interestingly, it also rated one recipe to have an average rating of over 5. Just like the base model, it overrates recipes more than it underrates them. The range of the residuals is about the same as the base model.
 
 ## Fairness Analysis
+
+For my fairness analysis, I decided to group my dataset based on the number of steps required to make the dish. To the dataset containing the predicted values and residuals of my final model, I added a boolean column 'under_10_steps' that was True if the recipe required less than 10 steps.
+
+Grouping by this categorical column and then finding the RMSE values of both groups, I found that recipes with over 10 steps had an RMSE of about 0.33 and recipes with under 10 steps had an RMSE of about 0.29. Though the values seem similar, a permutation test with a test statistic of difference in RMSE was conducted to see if the difference of 0.04 was statistically significant at the 0.05 significance level.
+
+**Null Hypothesis:** The model is fair. Its precision for recipes with over and under 10 steps are roughly the same and differences are due to random chacnce.
+**Alternative Hypothesis:** The model is unfair. The precision for recipes with under 10 steps is better than its precision for recipes with over 10 steps.
+
+1,000 iterations were run by grouping on shuffled permutations of the 'under_10_steps' column and collecting the differences in RMSE.
+
+The graph below shows the empirical distribution of differences in RMSE for those iterations and the red line shows the observed difference.
 
 <iframe
 	src="assets/fairness_rmse.html"
@@ -317,3 +328,7 @@ This model does not contain the hole in 4.7 and predicted a larger variety of ra
 	height="440"
 	frameborder="0"
 ></iframe>
+
+The test returned a p-value of 0.023, meaning that the difference is significant and the precision for recipes with under 10 steps is not the same as the precision for recipes with over 10 steps.
+
+## Conclusion
