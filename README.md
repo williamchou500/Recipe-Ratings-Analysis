@@ -8,7 +8,7 @@ I have always understood that eating healthy diet is an essential part of leadin
 
 The question I am interested in answering is: **'What is the relationship between the nutritional value of a recipe and its average rating?'**.
 
-This question is most significant for creators who are publishing their recipes on food.com. Knowing the answer to the above question may help them understand what qualities they should attempt to include in their recipes in order for their submissions to be more well received, show up more frequently in search results, and improve their popularity and online presence. For people just looking for recipes online, this answer to this question can still be beneficial. The information can help a consumer be more conscious of what may or may not skew the rating of a dish that is not simply the quality of the recipe. 
+This question can be significant for creators who are publishing their recipes on food.com. Knowing the answer to the above question may help them understand what qualities they should attempt to include in their recipes in order for their submissions to be more well received, show up more frequently in search results, and improve their popularity and online presence. For people just looking for recipes online, this answer to this question can still be beneficial. The information can help a consumer be more conscious of what may or may not skew the rating of a dish that is not simply the quality of the recipe. 
 
 Important to answering this question is data about recipes, their nutritional values, and consumer reviews. Two datasets have been compiled containing these data and more to answer the question.
 
@@ -169,13 +169,13 @@ It seems that the distribution of ratings for healthy and unhealthy foods is ver
 
 ### Interesting Aggregates
 
-The following pivot table was constructed by first placing all the recipes into brackets based on their average rating. The brackets go from non-inclusive to inclusive. 2-3 represents average ratings within (2, 3], 3-4 represents ratings within (3, 4], etc. It looks like recipes with a lower average have fewer ingredients and more steps.
+The following pivot table was constructed by first placing all the recipes into brackets based on their average rating. The brackets go from non-inclusive to inclusive. 2-3 represents average ratings within (2, 3], 3-4 represents ratings within (3, 4], etc. It looks like recipes with a lower average rating have more steps.
 
 | ratings_bracket   |   n_ingredients |   n_steps |
 |:------------------|----------------:|----------:|
-| 2-3               |         8.33333 |  12.1667  |
-| 3-4               |         9       |   9.74359 |
-| 4-5               |         8.93478 |  10.1582  |
+| 2-3               |         8.90909 |  12.1818  |
+| 3-4               |         9.14    |  11.41    |
+| 4-5               |         8.79282 |   9.70227 |
 
 ## Assessment of Missingness
 
@@ -208,7 +208,7 @@ A new column 'missing_rated' was added to a copy of the dataset not filtered to 
 	frameborder="0"
 ></iframe>
 
-The permutation test returned a p-value of 0. It is essentially impossible to get the observed difference in group means by chance alone. Thus, we reject the null hypothesis and can conclude that the missingness of rating does depend on the amount of saturated fat is in the recipe.
+The permutation test returned a p-value of **0**. It is essentially impossible to get the observed difference in group means by chance alone. Thus, we reject the null hypothesis and can conclude that the missingness of rating does depend on the amount of saturated fat is in the recipe.
 
 ### Permutation Test on 'minutes'
 
@@ -223,7 +223,7 @@ The permutation test returned a p-value of 0. It is essentially impossible to ge
 	frameborder="0"
 ></iframe>
 
-The permutation test returned a p-value of 0.13. Since this is greater than our significance value 0.05, we fail to reject the null and cannot conclude that the missingness of 'rating' depends on the minutes required to complete the recipe.
+The permutation test returned a p-value of **0.126**. Since this is greater than our significance value 0.05, we fail to reject the null and cannot conclude that the missingness of 'rating' depends on the minutes required to complete the recipe.
 
 ## Hypothesis Testing
 
@@ -251,7 +251,7 @@ After 1,000 iterations, a graph of the empirical distribution of group mean diff
 	frameborder="0"
 ></iframe>
 
-We found a p-value of 0.067 from our permutation test, so we fail to reject the null at the 0.05 significance level. We cannot conclude that healthy recipes have higher average ratings than healthy ones.
+We found a p-value of **0.009** from our permutation test, so we reject the null at the 0.05 significance level. We can conclude that healthy recipes tend to have higher average ratings than healthy ones.
 
 ## Framing a Prediction Problem
 
@@ -273,7 +273,7 @@ The 'healthy' column is a categorical column with two possibilities, True or Fal
 
 The dataset was split into training and test sets with the test set being 25% of the original data.
 
-The model had an RMSE of 0.27760100396487397 on the test set.
+The model had an RMSE of **0.2837608674635276** on the test set.
 
 The plot below shows the predicted ratings and how far off they were from the actual rating.
 
@@ -296,7 +296,7 @@ All the features aside from calories are PDV values whereas 'calories' simply st
 
 The threshold at the Binarizer was set to was a hyperparameter for this model. Different percentiles as well as the mean of the 'calories' column were tested to see which made for the most optimal model. The percentiles used were the 10th to the 90th in increments of 10.
 
-The model had an RMSE of 0.27682661065445985 on the test set, a very small improvement from the base model. With such a small improvement from the base model despite including more features, it suggests that the features added do not have much weight when it comes to how well rated a recipe is.
+The model had an RMSE of **0.28357740547392907** on the test set. This is a very small improvement from the base model. With such a small improvement from the base model despite including more features, it suggests that the features added do not have much weight when it comes to how well rated a recipe is.
 
 The plot below shows the predicted ratings and how far off they were from the actual rating.
 
@@ -329,6 +329,4 @@ The graph below shows the empirical distribution of differences in RMSE for thos
 	frameborder="0"
 ></iframe>
 
-The test returned a p-value of 0.023, meaning that the difference is significant and the precision for recipes with under 10 steps is not the same as the precision for recipes with over 10 steps.
-
-## Conclusion
+The test returned a p-value of **0.03**, meaning that the difference is significant at a 0.05 significance level and the precision for recipes with under 10 steps is not the same as the precision for recipes with over 10 steps.
